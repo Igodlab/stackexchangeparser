@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 from lxml import etree
 from pathlib import Path
 from datetime import datetime
@@ -95,12 +96,12 @@ for subfolder in subfolders:
             continue
     if has_validfiles(subfolder, stackexchangefiles):
         
-        if not os.path.isdir("{outputdir}\\{subfolder}".format(outputdir=outputdir, subfolder=os.path.basename(subfolder))):
-            os.mkdir("{outputdir}\\{subfolder}".format(outputdir=outputdir, subfolder=os.path.basename(subfolder)))
+        if not os.path.isdir("{outputdir}/{subfolder}".format(outputdir=outputdir, subfolder=os.path.basename(subfolder))):
+            os.mkdir("{outputdir}/{subfolder}".format(outputdir=outputdir, subfolder=os.path.basename(subfolder)))
             dircounter += 1
             for file in stackexchangefiles:
-                if os.path.isfile("{subfolder}\\{file}".format(subfolder=subfolder, file=file)):
-                    write_csv_from_xml("{subfolder}\\{sourcefile}".format(subfolder=subfolder, sourcefile=file), Path(file).stem, tables[Path(file).stem], "{destinationfolder}\\{subfolder}\\{tablename}.csv".format(destinationfolder=outputdir, subfolder=os.path.basename(subfolder), tablename=Path(file).stem))
+                if os.path.isfile("{subfolder}/{file}".format(subfolder=subfolder, file=file)):
+                    write_csv_from_xml("{subfolder}/{sourcefile}".format(subfolder=subfolder, sourcefile=file), Path(file).stem, tables[Path(file).stem], "{destinationfolder}/{subfolder}/{tablename}.csv".format(destinationfolder=outputdir, subfolder=os.path.basename(subfolder), tablename=Path(file).stem))
 
 elapsed_time = datetime.now() - start_time
 logging.info("Finished processing, exported to %s new folders in %s", dircounter, elapsed_time)
